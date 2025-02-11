@@ -1,0 +1,31 @@
+CREATE TABLE Book (
+    bookId INT PRIMARY KEY AUTO_INCREMENT,
+    bookTitle VARCHAR(75),
+    author VARCHAR(75),
+    pubYear CHAR(4),
+    status ENUM('Active', 'Inactive')
+    )
+
+
+CREATE TABLE Patron (
+    patronId INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(75),
+    address VARCHAR(70),
+    city VARCHAR(20),
+    stateCode CHAR(2),
+    zip CHAR(5),
+    email VARCHAR(30),
+    dateOfBirth DATE,
+    status ENUM('Active', 'Inactive')
+    )
+
+
+CREATE TABLE Transaction (
+    transId INT PRIMARY KEY AUTO_INCREMENT,
+    bookId INT,
+    patronId INT,
+    transType ENUM('Rent', 'Return'),
+    dateOfTrans DATE,
+    FOREIGN KEY (bookId) REFERENCES Book(bookId),
+    FOREIGN KEY (patronId) REFERENCES Patron(patronId)
+    )
