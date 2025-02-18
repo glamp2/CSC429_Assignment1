@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
-import model.Account;
 import model.EntityBase;
 
 import impresario.IView;
@@ -91,7 +90,7 @@ public class BookCollection  extends EntityBase implements IView
 
     public void findBooksWithTitleLike(String title){
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (pubYear >= '" + title + "')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (bookTitle like '%" + title + "%')";
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
@@ -112,7 +111,34 @@ public class BookCollection  extends EntityBase implements IView
         }
         else
         {
-            System.out.println("No books found after year: " + title);
+            System.out.println("No books found with title like: " + title);
+        }
+    }
+
+    public void findBooksWithAuthorLike(String author){
+
+        String query = "SELECT * FROM " + myTableName + " WHERE (author like '%" + author + "%')";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null)
+        {
+
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
+
+                Book book = new Book(nextBookData);
+
+                if (book != null)
+                {
+                    bookList.add(book);
+                }
+            }
+        }
+        else
+        {
+            System.out.println("No books found with author like: " + author);
         }
     }
 
@@ -136,24 +162,6 @@ public class BookCollection  extends EntityBase implements IView
     {
 
         myRegistry.updateSubscribers(key, this);
-    }
-
-    //----------------------------------------------------------
-    public Book retrieve(String bookId)
-    {
-        Book retValue = null;
-        for (int cnt = 0; cnt < bookList.size(); cnt++)
-        {
-            Book nextAcct = bookList.elementAt(cnt);
-            String nextBookId = (String)nextAcct.getState("AccountNumber");
-            if (nextBookId.equals(bookId) == true)
-            {
-                retValue = nextAcct;
-                return retValue; // we should say 'break;' here
-            }
-        }
-
-        return retValue;
     }
 
     /** Called via the IView relationship */

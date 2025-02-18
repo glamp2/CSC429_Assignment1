@@ -29,3 +29,19 @@ CREATE TABLE Transaction (
     FOREIGN KEY (bookId) REFERENCES Book(bookId),
     FOREIGN KEY (patronId) REFERENCES Patron(patronId)
     )
+
+
+    INSERT INTO Book (bookId, bookTitle, author, pubYear, status) VALUES
+        (1, 'The Brothers Karamazov', 'Fyodor Dostoevsky', '1880', 'Active'),
+        (2, 'Harry Potter and the Order of the Phoenix', 'JK Rowling', '2003', 'Active'),
+        (3, 'Dune', 'Frank Herbert', '1965', 'Active'),
+        (4, 'Project Hail Mary', 'Andy Weir', '2021', 'Active'),
+        (5, 'Dune Messiah', 'Frank Herbert', '1969', 'Active')
+
+    INSERT INTO Patron (patronId, name, address, city, stateCode, zip, email, dateOfBirth, status)
+    VALUES
+    (1, 'John Doe', '123 Maple St', 'Albany', 'NY', '12201', 'johndoe@email.com', '1985-06-15', 'Active'),
+    (2, 'Sarah Smith', '456 Oak Ave', 'Los Angeles', 'CA', '90001', 'sarahsmith@email.com', '1992-03-22', 'Active'),
+    (3, 'Michael Johnson', '789 Pine Rd', 'Chicago', 'IL', '60601', 'mjohnson@email.com', '1980-09-10', 'Active'),
+    (4, 'Emily Davis', '321 Birch Ln', 'Albany', 'NY', '12201', 'edavis@email.com', '1995-12-05', 'Active'),
+    (5, 'David Brown', '654 Cedar Ct', 'Miami', 'FL', '33101', 'dbrown@email.com', '1988-07-18', 'Active')
