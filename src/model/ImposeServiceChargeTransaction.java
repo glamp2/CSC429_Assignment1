@@ -4,11 +4,8 @@ package model;
 // system imports
 import javafx.scene.Scene;
 import java.util.Properties;
-import java.util.Vector;
 
 // project imports
-import event.Event;
-import exception.InvalidPrimaryKeyException;
 
 import userinterface.View;
 import userinterface.ViewFactory;
@@ -18,7 +15,7 @@ import userinterface.ViewFactory;
 public class ImposeServiceChargeTransaction extends Transaction
 {
 	private AccountCollection accounts;
-	private Account selectedAccount;
+	private Patron selectedAccount;
 
 	// GUI Components
 
@@ -31,7 +28,7 @@ public class ImposeServiceChargeTransaction extends Transaction
 	 *
 	 */
 	//----------------------------------------------------------
-	public ImposeServiceChargeTransaction(AccountHolder cust)
+	public ImposeServiceChargeTransaction(PatronHolder cust)
 		throws Exception
 	{
 		super(cust);
@@ -106,7 +103,7 @@ public class ImposeServiceChargeTransaction extends Transaction
 			String acctHolderID = (String)value;
 			try
 			{
-				AccountHolder customer = new AccountHolder(acctHolderID);
+				PatronHolder customer = new PatronHolder(acctHolderID);
 
 				try
 				{

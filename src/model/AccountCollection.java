@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 // project imports
 import exception.InvalidPrimaryKeyException;
 import event.Event;
-import database.*;
 
 import impresario.IView;
 
@@ -23,12 +22,12 @@ public class AccountCollection  extends EntityBase implements IView
 {
 	private static final String myTableName = "Account";
 
-	private Vector<Account> accounts;
+	private Vector<Patron> accounts;
 	// GUI Components
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public AccountCollection( AccountHolder cust) throws
+	public AccountCollection( PatronHolder cust) throws
 		Exception
 	{
 		super(myTableName);
@@ -57,13 +56,13 @@ public class AccountCollection  extends EntityBase implements IView
 
 		if (allDataRetrieved != null)
 		{
-			accounts = new Vector<Account>();
+			accounts = new Vector<Patron>();
 
 			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
 			{
 				Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
 
-				Account account = new Account(nextAccountData);
+				Patron account = new Patron(nextAccountData);
 
 				if (account != null)
 				{
@@ -81,7 +80,7 @@ public class AccountCollection  extends EntityBase implements IView
 	}
 
 	//----------------------------------------------------------------------------------
-	private void addAccount(Account a)
+	private void addAccount(Patron a)
 	{
 		//accounts.add(a);
 		int index = findIndexToAdd(a);
@@ -89,7 +88,7 @@ public class AccountCollection  extends EntityBase implements IView
 	}
 
 	//----------------------------------------------------------------------------------
-	private int findIndexToAdd(Account a)
+	private int findIndexToAdd(Patron a)
 	{
 		//users.add(u);
 		int low=0;
@@ -100,9 +99,9 @@ public class AccountCollection  extends EntityBase implements IView
 		{
 			middle = (low+high)/2;
 
-			Account midSession = accounts.elementAt(middle);
+			Patron midSession = accounts.elementAt(middle);
 
-			int result = Account.compare(a,midSession);
+			int result = Patron.compare(a,midSession);
 
 			if (result ==0)
 			{
@@ -145,12 +144,12 @@ public class AccountCollection  extends EntityBase implements IView
 	}
 
 	//----------------------------------------------------------
-	public Account retrieve(String accountNumber)
+	public Patron retrieve(String accountNumber)
 	{
-		Account retValue = null;
+		Patron retValue = null;
 		for (int cnt = 0; cnt < accounts.size(); cnt++)
 		{
-			Account nextAcct = accounts.elementAt(cnt);
+			Patron nextAcct = accounts.elementAt(cnt);
 			String nextAccNum = (String)nextAcct.getState("AccountNumber");
 			if (nextAccNum.equals(accountNumber) == true)
 			{

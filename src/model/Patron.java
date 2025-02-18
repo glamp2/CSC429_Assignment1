@@ -7,20 +7,15 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
-import javax.swing.JFrame;
 
 // project imports
 import exception.InvalidPrimaryKeyException;
-import database.*;
 
 import impresario.IView;
 
-import userinterface.View;
-import userinterface.ViewFactory;
-
 /** The class containing the Account for the ATM application */
 //==============================================================
-public class Account extends EntityBase implements IView
+public class Patron extends EntityBase implements IView
 {
 	private static final String myTableName = "Account";
 
@@ -32,7 +27,7 @@ public class Account extends EntityBase implements IView
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public Account(String accountNumber)
+	public Patron(String accountNumber)
 		throws InvalidPrimaryKeyException
 	{
 		super(myTableName);
@@ -85,7 +80,7 @@ public class Account extends EntityBase implements IView
 	// Can also be used to create a NEW Account (if the system it is part of
 	// allows for a new account to be set up)
 	//----------------------------------------------------------
-	public Account(Properties props)
+	public Patron(Properties props)
 	{
 		super(myTableName);
 
@@ -139,7 +134,7 @@ public class Account extends EntityBase implements IView
 	 * Verify ownership
 	 */
 	//----------------------------------------------------------
-	public boolean verifyOwnership(AccountHolder cust)
+	public boolean verifyOwnership(PatronHolder cust)
 	{
 		if (cust == null)
 		{
@@ -217,7 +212,7 @@ public class Account extends EntityBase implements IView
 	}
 	
 	//-----------------------------------------------------------------------------------
-	public static int compare(Account a, Account b)
+	public static int compare(Patron a, Patron b)
 	{
 		String aNum = (String)a.getState("AccountNumber");
 		String bNum = (String)b.getState("AccountNumber");

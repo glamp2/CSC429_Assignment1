@@ -5,7 +5,6 @@ package model;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.util.Properties;
-import java.util.Vector;
 
 // project imports
 import event.Event;
@@ -18,8 +17,8 @@ import userinterface.ViewFactory;
 //==============================================================
 public class TransferTransaction extends Transaction
 {
-	private Account source;
-	private Account dest;
+	private Patron source;
+	private Patron dest;
 	private String transferAmount;
 	// GUI Components
 
@@ -32,7 +31,7 @@ public class TransferTransaction extends Transaction
 	 *
 	 */
 	//----------------------------------------------------------
-	public TransferTransaction(AccountHolder cust)
+	public TransferTransaction(PatronHolder cust)
 		throws Exception
 	{
 		super(cust);

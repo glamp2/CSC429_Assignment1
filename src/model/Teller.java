@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 
 // project imports
 import impresario.IModel;
-import impresario.ISlideShow;
 import impresario.IView;
 import impresario.ModelRegistry;
 
@@ -33,7 +32,7 @@ public class Teller implements IView, IModel
 	private Properties dependencies;
 	private ModelRegistry myRegistry;
 
-	private AccountHolder myAccountHolder;
+	private PatronHolder myAccountHolder;
 
 	// GUI Components
 	private Hashtable<String, Scene> myViews;
@@ -184,7 +183,7 @@ public class Teller implements IView, IModel
 	{
 		try
 		{
-			myAccountHolder = new AccountHolder(props);
+			myAccountHolder = new PatronHolder(props);
 			// DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
 			return true;
 		}
