@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
+import model.Account;
 import model.EntityBase;
 
 import impresario.IView;
@@ -23,103 +24,96 @@ public class BookCollection  extends EntityBase implements IView
 {
     private static final String myTableName = "Book";
 
-    private Vector<Book> books;
+    private Vector<Book> bookList;
     // GUI Components
 
     // constructor for this class
     //----------------------------------------------------------
-    public BookCollection( AccountHolder cust) throws
-            Exception
-    {
+    public BookCollection() throws
+            Exception {
         super(myTableName);
+        bookList = new Vector<Book>();
+    }
 
-        if (cust == null)
-        {
-            new Event(Event.getLeafLevelClassName(this), "<init>",
-                    "Missing book information", Event.FATAL);
-            throw new Exception
-                    ("UNEXPECTED ERROR: AccountCollection.<init>: book information is null");
-        }
+    public void findBooksOlderThanDate(String year){
 
-        String bookId = (String)cust.getState("ID");
-
-        if (bookId == null)
-        {
-            new Event(Event.getLeafLevelClassName(this), "<init>",
-                    "Data corrupted: Account Holder has no id in database", Event.FATAL);
-            throw new Exception
-                    ("UNEXPECTED ERROR: AccountCollection.<init>: Data corrupted: book has no id in repository");
-        }
-
-        String query = "SELECT * FROM " + myTableName + " WHERE (OwnerID = " + bookId + ")";
+        String query = "SELECT * FROM " + myTableName + " WHERE (pubYear <= '" + year + "')";
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null)
         {
-            books = new Vector<Account>();
 
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
-                Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
+                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
 
-                Account book = new Account(nextAccountData);
+                Book book = new Book(nextBookData);
 
                 if (book != null)
                 {
-                    addAccount(book);
+                    bookList.add(book);
                 }
             }
-
         }
         else
         {
-            throw new InvalidPrimaryKeyException("No books for customer : "
-                    + bookId + ". Name : " + cust.getState("Name"));
+            System.out.println("No books found prior to year: " + year);
         }
-
     }
 
-    //----------------------------------------------------------------------------------
-    private void addAccount(Account a)
-    {
-        //books.add(a);
-        int index = findIndexToAdd(a);
-        books.insertElementAt(a,index); // To build up a collection sorted on some key
-    }
+    public void findBooksNewerThanDate(String year){
 
-    //----------------------------------------------------------------------------------
-    private int findIndexToAdd(Account a)
-    {
-        //users.add(u);
-        int low=0;
-        int high = books.size()-1;
-        int middle;
+        String query = "SELECT * FROM " + myTableName + " WHERE (pubYear >= '" + year + "')";
 
-        while (low <=high)
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null)
         {
-            middle = (low+high)/2;
 
-            Account midSession = books.elementAt(middle);
-
-            int result = Account.compare(a,midSession);
-
-            if (result ==0)
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
-                return middle;
-            }
-            else if (result<0)
-            {
-                high=middle-1;
-            }
-            else
-            {
-                low=middle+1;
-            }
+                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
 
+                Book book = new Book(nextBookData);
 
+                if (book != null)
+                {
+                    bookList.add(book);
+                }
+            }
         }
-        return low;
+        else
+        {
+            System.out.println("No books found after year: " + year);
+        }
+    }
+
+    public void findBooksWithTitleLike(String title){
+
+        String query = "SELECT * FROM " + myTableName + " WHERE (pubYear >= '" + title + "')";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null)
+        {
+
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
+
+                Book book = new Book(nextBookData);
+
+                if (book != null)
+                {
+                    bookList.add(book);
+                }
+            }
+        }
+        else
+        {
+            System.out.println("No books found after year: " + title);
+        }
     }
 
 
@@ -129,10 +123,10 @@ public class BookCollection  extends EntityBase implements IView
     //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("Accounts"))
-            return books;
+        if (key.equals("Books"))
+            return bookList;
         else
-        if (key.equals("AccountList"))
+        if (key.equals("BookList"))
             return this;
         return null;
     }
@@ -147,12 +141,12 @@ public class BookCollection  extends EntityBase implements IView
     //----------------------------------------------------------
     public Book retrieve(String bookId)
     {
-        Account retValue = null;
-        for (int cnt = 0; cnt < books.size(); cnt++)
+        Book retValue = null;
+        for (int cnt = 0; cnt < bookList.size(); cnt++)
         {
-            Account nextAcct = books.elementAt(cnt);
-            String nextAccNum = (String)nextAcct.getState("AccountNumber");
-            if (nextAccNum.equals(bookId) == true)
+            Book nextAcct = bookList.elementAt(cnt);
+            String nextBookId = (String)nextAcct.getState("AccountNumber");
+            if (nextBookId.equals(bookId) == true)
             {
                 retValue = nextAcct;
                 return retValue; // we should say 'break;' here
@@ -173,14 +167,14 @@ public class BookCollection  extends EntityBase implements IView
     protected void createAndShowView()
     {
 
-        Scene localScene = myViews.get("AccountCollectionView");
+        Scene localScene = myViews.get("BookCollectionView");
 
         if (localScene == null)
         {
             // create our new view
-            View newView = ViewFactory.createView("AccountCollectionView", this);
+            View newView = ViewFactory.createView("BookCollectionView", this);
             localScene = new Scene(newView);
-            myViews.put("AccountCollectionView", localScene);
+            myViews.put("BookCollectionView", localScene);
         }
         // make the view visible by installing it into the frame
         swapToView(localScene);
