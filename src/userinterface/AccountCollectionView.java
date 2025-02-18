@@ -19,7 +19,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -37,7 +36,7 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
-import model.Account;
+import model.Patron;
 import model.AccountCollection;
 
 //==============================================================================
@@ -91,7 +90,7 @@ public class AccountCollectionView extends View
 
 			while (entries.hasMoreElements() == true)
 			{
-				Account nextAccount = (Account)entries.nextElement();
+				Patron nextAccount = (Patron)entries.nextElement();
 				Vector<String> view = nextAccount.getEntryListView();
 
 				// add this list entry to the list

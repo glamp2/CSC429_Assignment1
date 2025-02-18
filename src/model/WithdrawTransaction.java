@@ -5,7 +5,6 @@ package model;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.util.Properties;
-import java.util.Vector;
 
 // project imports
 import event.Event;
@@ -18,7 +17,7 @@ import userinterface.ViewFactory;
 //==============================================================
 public class WithdrawTransaction extends Transaction
 {
-	private Account myAccount; // needed for GUI only
+	private Patron myAccount; // needed for GUI only
 	private String withdrawAmount; // needed for GUI only
 
 	// GUI Components
@@ -32,7 +31,7 @@ public class WithdrawTransaction extends Transaction
 	 *
 	 */
 	//----------------------------------------------------------
-	public WithdrawTransaction(AccountHolder cust)
+	public WithdrawTransaction(PatronHolder cust)
 		throws Exception
 	{
 		super(cust);

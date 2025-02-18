@@ -4,12 +4,10 @@ package model;
 // system imports
 import java.util.Properties;
 import java.util.Vector;
-import javax.swing.JFrame;
 
 // project imports
 import exception.InvalidPrimaryKeyException;
 import event.Event;
-import database.*;
 
 import impresario.IView;
 
@@ -24,7 +22,7 @@ public class AccountCatalog  extends EntityBase implements IView
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public AccountCatalog( AccountHolder cust) throws
+	public AccountCatalog( PatronHolder cust) throws
 		Exception
 	{
 		super(myTableName);
