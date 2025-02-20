@@ -70,8 +70,8 @@ public class JDBCBroker
      			//theDriver = (Driver)e.nextElement();
      			System.out.println("Driver Major Version = " + 
      			 d.getMajorVersion());
-     			//theDriver.getMajorVersion());   	
- 	        } */  
+     			//theDriver.getMajorVersion());
+ 	        } */
 		
 		return myInstance;
 	}
@@ -82,7 +82,7 @@ public class JDBCBroker
 	protected JDBCBroker()
     	{
     		// DEBUG: System.out.println("JDBCBroker.JDBCBroker()");
-		props = new PropertyFile("dbConfig.ini");
+		props = new PropertyFile("src/dbConfig.ini");
 		if (props != null)
 		{
 			dbName = props.getProperty("dbName");
@@ -148,7 +148,7 @@ public class JDBCBroker
 				}
 			}   
 		}	
-		//System.out.println("JDBCBroker.getConnection() with connection " + theDBConnection);
+		// System.out.println("JDBCBroker.getConnection() with connection " + theDBConnection);
 	       	return theDBConnection;
     }
     
@@ -161,7 +161,7 @@ public class JDBCBroker
 	}
 	
 	//--------------------------------------------------------
-	protected void finalize()
+    protected void finalize()
 	{
 		if(theDBConnection != null)
         {

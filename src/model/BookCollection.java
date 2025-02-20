@@ -1,25 +1,19 @@
-
+package model;
 
 // system imports
-import java.util.Properties;
-import java.util.Vector;
-import javafx.scene.Scene;
-
-// project imports
-import exception.InvalidPrimaryKeyException;
-import event.Event;
-import database.*;
-import model.EntityBase;
 
 import impresario.IView;
-
+import javafx.scene.Scene;
 import userinterface.View;
 import userinterface.ViewFactory;
+
+import java.util.Properties;
+import java.util.Vector;
 
 
 /** The class containing the BookCollection for the ATM application */
 //==============================================================
-public class BookCollection  extends EntityBase implements IView
+public class BookCollection extends EntityBase implements IView
 {
     private static final String myTableName = "Book";
 
@@ -195,6 +189,12 @@ public class BookCollection  extends EntityBase implements IView
         if (mySchema == null)
         {
             mySchema = getSchemaInfo(tableName);
+        }
+    }
+
+    public void display(){
+        for(int i = 0; i < bookList.size(); i++){
+            System.out.println(bookList.elementAt(i));
         }
     }
 }
