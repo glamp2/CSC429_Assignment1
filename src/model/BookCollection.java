@@ -32,87 +32,34 @@ public class BookCollection extends EntityBase implements IView
 
         String query = "SELECT * FROM " + myTableName + " WHERE (pubYear <= '" + year + "')";
 
-        Vector allDataRetrieved = getSelectQueryResult(query);
-
-        if (allDataRetrieved != null)
-        {
-
-            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
-            {
-                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
-
-                Book book = new Book(nextBookData);
-
-                if (book != null)
-                {
-                    bookList.add(book);
-                }
-            }
-        }
-        else
-        {
-            System.out.println("No books found prior to year: " + year);
-        }
+        processQuery(query);
     }
 
     public void findBooksNewerThanDate(String year){
 
         String query = "SELECT * FROM " + myTableName + " WHERE (pubYear >= '" + year + "')";
 
-        Vector allDataRetrieved = getSelectQueryResult(query);
-
-        if (allDataRetrieved != null)
-        {
-
-            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
-            {
-                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
-
-                Book book = new Book(nextBookData);
-
-                if (book != null)
-                {
-                    bookList.add(book);
-                }
-            }
-        }
-        else
-        {
-            System.out.println("No books found after year: " + year);
-        }
+        processQuery(query);
     }
 
     public void findBooksWithTitleLike(String title){
 
         String query = "SELECT * FROM " + myTableName + " WHERE (bookTitle like '%" + title + "%')";
 
-        Vector allDataRetrieved = getSelectQueryResult(query);
-
-        if (allDataRetrieved != null)
-        {
-
-            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
-            {
-                Properties nextBookData = (Properties)allDataRetrieved.elementAt(cnt);
-
-                Book book = new Book(nextBookData);
-
-                if (book != null)
-                {
-                    bookList.add(book);
-                }
-            }
-        }
-        else
-        {
-            System.out.println("No books found with title like: " + title);
-        }
+        processQuery(query);
     }
 
-    public void findBooksWithAuthorLike(String author){
+    public void findBooksWithAuthorLike(String author) {
 
         String query = "SELECT * FROM " + myTableName + " WHERE (author like '%" + author + "%')";
 
+        processQuery(query);
+    }
+
+    private void processQuery(String query){
+
+        bookList.clear();
+
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null)
@@ -129,10 +76,6 @@ public class BookCollection extends EntityBase implements IView
                     bookList.add(book);
                 }
             }
-        }
-        else
-        {
-            System.out.println("No books found with author like: " + author);
         }
     }
 

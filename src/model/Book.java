@@ -76,7 +76,7 @@ public class Book extends EntityBase implements IView {
         }
     }
 
-    public void update() {
+    public void save() {
         updateStateInDatabase();
     }
 
@@ -88,8 +88,7 @@ public class Book extends EntityBase implements IView {
             {
                 // update
                 Properties whereClause = new Properties();
-                whereClause.setProperty("bookId",
-                        persistentState.getProperty("bookId"));
+                whereClause.setProperty("bookId", persistentState.getProperty("bookId"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Book data for book id: " + persistentState.getProperty("bookId") + " updated successfully in database!";
             }
@@ -148,6 +147,10 @@ public class Book extends EntityBase implements IView {
 
     @Override
     public String toString() {
-        return (String)persistentState.get("bookTitle") + ", " + (String)persistentState.get("author") + ", " + (String)persistentState.get("pubYear");
+        return (String)persistentState.get("bookId") + ", "
+                + (String)persistentState.get("bookTitle") + ", "
+                + (String)persistentState.get("author") + ", "
+                + (String)persistentState.get("pubYear") + ", "
+                + (String)persistentState.get("status");
     }
 }
