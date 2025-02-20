@@ -1,21 +1,14 @@
-
+package model;
 
 // system imports
+
+import exception.InvalidPrimaryKeyException;
+import impresario.IView;
+
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
-import javax.swing.JFrame;
-
-// project imports
-import exception.InvalidPrimaryKeyException;
-import database.*;
-import model.EntityBase;
-
-import impresario.IView;
-
-import userinterface.View;
-import userinterface.ViewFactory;
 
 
 public class Book extends EntityBase implements IView {
@@ -37,11 +30,11 @@ public class Book extends EntityBase implements IView {
 
         Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
-        // You must get one account at least
+        // You must get one book at least
         if (allDataRetrieved != null) {
             int size = allDataRetrieved.size();
 
-            // There should be EXACTLY one account. More than that is an error.
+            // There should be EXACTLY one book. More than that is an error.
             if (size != 1) {
                 throw new InvalidPrimaryKeyException("Multiple books matching id: " + bookId + " found.");
             } else {
@@ -151,5 +144,10 @@ public class Book extends EntityBase implements IView {
         {
             mySchema = getSchemaInfo(tableName);
         }
+    }
+
+    @Override
+    public String toString() {
+        return (String)persistentState.get("bookTitle") + ", " + (String)persistentState.get("author") + ", " + (String)persistentState.get("pubYear");
     }
 }
