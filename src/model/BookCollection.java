@@ -44,14 +44,14 @@ public class BookCollection extends EntityBase implements IView
 
     public void findBooksWithTitleLike(String title){
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (bookTitle like '%" + title + "%')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (bookTitle LIKE '%" + title + "%')";
 
         processQuery(query);
     }
 
     public void findBooksWithAuthorLike(String author) {
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (author like '%" + author + "%')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (author LIKE '%" + author + "%')";
 
         processQuery(query);
     }

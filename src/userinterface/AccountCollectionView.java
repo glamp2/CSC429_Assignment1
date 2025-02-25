@@ -36,7 +36,7 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
-import model.Patron;
+import model.Account;
 import model.AccountCollection;
 
 //==============================================================================
@@ -90,7 +90,7 @@ public class AccountCollectionView extends View
 
 			while (entries.hasMoreElements() == true)
 			{
-				Patron nextAccount = (Patron)entries.nextElement();
+				Account nextAccount = (Account)entries.nextElement();
 				Vector<String> view = nextAccount.getEntryListView();
 
 				// add this list entry to the list

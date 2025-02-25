@@ -2,19 +2,22 @@
 package model;
 
 // system imports
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
+import javax.swing.JFrame;
 
 // project imports
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
+import database.*;
 
 import impresario.IView;
 
 /** The class containing the AccountHolder  for the ATM application */
 //==============================================================
-public class PatronHolder extends EntityBase implements IView
+public class AccountHolder extends EntityBase implements IView
 {
 	private static final String myTableName = "AccountHolder";
 
@@ -22,7 +25,7 @@ public class PatronHolder extends EntityBase implements IView
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public PatronHolder(Properties props)
+	public AccountHolder(Properties props)
 		throws InvalidPrimaryKeyException, PasswordMismatchException
 	{
 		super(myTableName);
@@ -92,7 +95,7 @@ public class PatronHolder extends EntityBase implements IView
 	}
 
 	//----------------------------------------------------------
-	public PatronHolder(String idToQuery)
+	public AccountHolder(String idToQuery)
 		throws InvalidPrimaryKeyException
 	{
 		super(myTableName);

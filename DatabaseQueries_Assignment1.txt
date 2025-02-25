@@ -3,7 +3,7 @@ CREATE TABLE Book (
     bookTitle VARCHAR(75),
     author VARCHAR(75),
     pubYear CHAR(4),
-    status ENUM('Active', 'Inactive')
+    status ENUM('Active', 'Inactive') DEFAULT 'Active'
     )
 
 
@@ -16,7 +16,7 @@ CREATE TABLE Patron (
     zip CHAR(5),
     email VARCHAR(30),
     dateOfBirth VARCHAR(12),
-    status ENUM('Active', 'Inactive')
+    status ENUM('Active', 'Inactive') DEFAULT 'Active'
     )
 
 
@@ -31,15 +31,16 @@ CREATE TABLE Transaction (
     )
 
 
-    INSERT INTO Book (bookId, bookTitle, author, pubYear, status) VALUES
-        (1, 'The Brothers Karamazov', 'Fyodor Dostoevsky', '1880', 'Active'),
-        (2, 'Harry Potter and the Order of the Phoenix', 'JK Rowling', '2003', 'Active'),
-        (3, 'Dune', 'Frank Herbert', '1965', 'Active'),
-        (4, 'Project Hail Mary', 'Andy Weir', '2021', 'Active'),
-        (5, 'Dune Messiah', 'Frank Herbert', '1969', 'Active')
+INSERT INTO Book (bookId, bookTitle, author, pubYear, status)
+VALUES
+    (1, 'The Brothers Karamazov', 'Fyodor Dostoevsky', '1880', 'Active'),
+    (2, 'Harry Potter and the Order of the Phoenix', 'JK Rowling', '2003', 'Active'),
+    (3, 'Dune', 'Frank Herbert', '1965', 'Active'),
+    (4, 'Project Hail Mary', 'Andy Weir', '2021', 'Active'),
+    (5, 'Dune Messiah', 'Frank Herbert', '1969', 'Active')
 
-    INSERT INTO Patron (patronId, name, address, city, stateCode, zip, email, dateOfBirth, status)
-    VALUES
+INSERT INTO Patron (patronId, name, address, city, stateCode, zip, email, dateOfBirth, status)
+VALUES
     (1, 'John Doe', '123 Maple St', 'Albany', 'NY', '12201', 'johndoe@email.com', '1985-06-15', 'Active'),
     (2, 'Sarah Smith', '456 Oak Ave', 'Los Angeles', 'CA', '90001', 'sarahsmith@email.com', '1992-03-22', 'Active'),
     (3, 'Michael Johnson', '789 Pine Rd', 'Chicago', 'IL', '60601', 'mjohnson@email.com', '1980-09-10', 'Active'),

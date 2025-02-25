@@ -15,6 +15,7 @@ import event.Event;
 import impresario.*;
 
 import userinterface.MainStageContainer;
+import userinterface.View;
 import userinterface.WindowPosition;
 
 /** The class containing the Transaction for the ATM application */
@@ -29,7 +30,7 @@ abstract public class Transaction implements IView, IModel
 	protected Stage myStage;
 	protected Hashtable<String, Scene> myViews;
 
-	protected PatronHolder myCust;
+	protected AccountHolder myCust;
 
 	protected Vector myAccountIDs;
 	// GUI Components
@@ -42,7 +43,7 @@ abstract public class Transaction implements IView, IModel
 	 *
 	 */
 	//----------------------------------------------------------
-	protected Transaction(PatronHolder cust) throws Exception
+	protected Transaction(AccountHolder cust) throws Exception
 	{
 
 		myStage = MainStageContainer.getInstance();
@@ -130,10 +131,10 @@ abstract public class Transaction implements IView, IModel
 	 * Create an account (based on account number passed to you from the view)
 	 */
 	//----------------------------------------------------------
-	protected Patron createAccount(String accountNumber) throws
+	protected Account createAccount(String accountNumber) throws
 		InvalidPrimaryKeyException
 	{
-		return new Patron(accountNumber);
+		return new Account(accountNumber);
 	}
 
 	//----------------------------------------------------------
